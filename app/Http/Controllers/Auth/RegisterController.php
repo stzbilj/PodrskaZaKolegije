@@ -50,8 +50,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|integer',
+            'jmbag' => 'required_if:role,==,1|integer|size:10',
         ]);
     }
 
@@ -63,10 +66,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // add to jmbag table??
         return User::create([
             'name' => $data['name'],
+            'surname'=> $data['surname'],
             'email' => $data['email'],
+            'role' => $data['role'],
             'password' => Hash::make($data['password']),
+
         ]);
     }
 }
