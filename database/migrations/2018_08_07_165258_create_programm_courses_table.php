@@ -14,8 +14,9 @@ class CreateProgrammCoursesTable extends Migration
     public function up()
     {
         Schema::create('programm_courses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('course_id');
+            $table->integer('programm_id');
+            $table->integer('year');
         });
     }
 

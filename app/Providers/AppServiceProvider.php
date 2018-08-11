@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         view()->composer('layouts.navbar', function($view){
-            $view->with('courses',  \App\Courses::courses());
+            $view->with('courses',  \App\Models\Courses::courses());
         });
     }
 

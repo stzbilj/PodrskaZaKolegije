@@ -17,6 +17,7 @@ class CreateProgrammsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('year_no');
+            $table->string('type');
         });
     }
 
