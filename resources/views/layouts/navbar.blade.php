@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,6 +27,11 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div> -->
                 </li>
+                @if(auth()->check() && Auth::user()->role === 0)
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dodaj novi kolegij</a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -38,7 +43,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->name }} {{ Auth::user()->surname }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

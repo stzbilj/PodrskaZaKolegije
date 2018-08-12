@@ -11,8 +11,7 @@ class ProgrammesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('courses')->insert(
+        DB::table('programms')->insert(
             array(
                 array( 
                     'name' => 'Matematika',
