@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class CoursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('prof', ['except' => ['index', 'show']]);
+        $this->middleware('cadmin', ['only' => ['edit', 'update', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +20,7 @@ class CoursesController extends Controller
     public function index()
     {
         //
+        return view('home');
     }
 
     /**

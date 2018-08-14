@@ -27,7 +27,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div> -->
                 </li>
-                @if(auth()->check() && Auth::user()->role === 0)
+                @if(auth()->check() && Auth::user->isAdmin())
                 <li class="nav-item">
                     <a class="nav-link" href="/">Dodaj novi kolegij</a>
                 </li>
