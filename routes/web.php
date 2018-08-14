@@ -12,6 +12,8 @@
 */
 
 Route::get('/', function () {
+    session()->flash('message', 'Dobrodošli! Stranice');
+
     return view('welcome');
 });
 

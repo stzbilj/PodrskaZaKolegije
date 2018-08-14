@@ -19,7 +19,7 @@ class CoursesTableSeeder extends Seeder
         );
 
         $userId = DB::table('users')->where('role', 0)->pluck('id')->first();
-        DB::table('course_admins')->insert(
+        DB::table('admin_course')->insert(
             array(
                 'course_id' => $courseId,
                 'user_id' => $userId,
@@ -27,7 +27,7 @@ class CoursesTableSeeder extends Seeder
         );
 
         $programmsId = DB::table('programms')->where('name', 'Matematika')->pluck('id')->first();
-        DB::table('programm_courses')->insert(
+        DB::table('course_programm')->insert(
             array(
                 'course_id' => $courseId,
                 'programm_id' => $programmsId,
@@ -41,7 +41,7 @@ class CoursesTableSeeder extends Seeder
             )
         );
 
-        DB::table('course_admins')->insert(
+        DB::table('admin_course')->insert(
             array(
                 'course_id' => $courseId,
                 'user_id' => $userId,
@@ -49,7 +49,7 @@ class CoursesTableSeeder extends Seeder
         );
         
         $programmsId = DB::table('programms')->where('name', 'Računarstvo i matematika')->pluck('id')->first();
-        DB::table('programm_courses')->insert(
+        DB::table('course_programm')->insert(
             array(
                 'course_id' => $courseId,
                 'programm_id' => $programmsId,

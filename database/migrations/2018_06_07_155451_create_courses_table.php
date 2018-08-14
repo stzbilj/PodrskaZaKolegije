@@ -17,6 +17,12 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('name');
         });
+
+        Schema::create('admin_course', function (Blueprint $table) {
+            $table->integer('course_id');
+            $table->integer('user_id');
+            $table->primary(['course_id', 'user_id']);
+        });
     }
 
     /**
@@ -27,5 +33,6 @@ class CreateCoursesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('courses');
+        Schema::dropIfExists('admin_course');
     }
 }

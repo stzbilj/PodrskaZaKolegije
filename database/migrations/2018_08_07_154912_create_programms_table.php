@@ -19,6 +19,13 @@ class CreateProgrammsTable extends Migration
             $table->integer('year_no');
             $table->string('type');
         });
+
+        Schema::create('course_programm', function (Blueprint $table) {
+            $table->integer('course_id');
+            $table->integer('programm_id');
+            $table->integer('year');
+            $table->primary(['course_id', 'programm_id']);
+        });
     }
 
     /**
@@ -29,5 +36,6 @@ class CreateProgrammsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('programms');
+        Schema::dropIfExists('course_programm');
     }
 }

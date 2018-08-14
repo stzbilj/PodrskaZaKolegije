@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <h1>Dobrođošli!</h1>
                 <p>
-                    Ovo su stranice za podršku nekim kolegijima
+                    Ovo su stranice za podršku kolegijima
                 </p>
         </div>
     </div>
