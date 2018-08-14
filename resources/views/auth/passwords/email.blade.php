@@ -3,11 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Resetiranje Lozinke') }}</div>
-
                 <div class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">{{ __('Resetiranje Lozinke') }}</h4>
+                    <h6 class="card-title text-center mb-4 mt-1">{{ __('Slanje linka za reset lozinke') }}</h4>
+                    <hr>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -31,10 +32,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Pošalji Link za Reset Lozinke') }}
+                        <div class="form-group row mb-0 justify-content-center">
+                            <div class="col-md-6 col-md-offset-3">    
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    {{ __('Pošalji Link') }}
                                 </button>
                             </div>
                         </div>
