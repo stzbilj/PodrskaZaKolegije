@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Professor
 {
@@ -15,7 +16,7 @@ class Professor
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::checked() && Auth::user->isProfessor() ) {
+        if( Auth::check() && Auth::user()->isProfessor() ) {
             return $next($request);
         }
 

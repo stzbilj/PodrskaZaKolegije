@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CourseAdmin
 {
@@ -15,7 +16,7 @@ class CourseAdmin
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::checked() && Auth::user->isAdmin() ) {
+        if( Auth::check() && Auth::user()->isAdmin($request->course) ) {
             return $next($request);
         }
         return redirect('home');;
