@@ -29,7 +29,7 @@
                 </li>
                 @if(auth()->check() && Auth::user()->isProfessor())
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Dodaj novi kolegij</a>
+                    <a class="nav-link" href="{{ route('course.create') }}">Dodaj novi kolegij</a>
                 </li>
                 @endif
             </ul>

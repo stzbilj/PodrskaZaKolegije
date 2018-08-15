@@ -11,7 +11,7 @@ class Courses extends Model
 
     public static function courses()
     {
-        return static::select('name')->orderBy('name')->get()->toArray();
+        return static::orderBy('name')->get()->toArray();
     }
 
     public function programmes()

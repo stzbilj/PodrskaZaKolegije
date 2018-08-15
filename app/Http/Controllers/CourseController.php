@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CourseController extends Controller
 {
@@ -20,7 +22,7 @@ class CourseController extends Controller
     public function index()
     {
         //
-        return view('home');
+        return Redirect::action('HomeController@index');
     }
 
     /**
@@ -31,6 +33,7 @@ class CourseController extends Controller
     public function create()
     {
         //
+        return view('course.createForm');
     }
 
     /**
@@ -50,9 +53,10 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Courses $course)
     {
         //
+        // return $course;
     }
 
     /**
