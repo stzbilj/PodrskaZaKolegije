@@ -25,8 +25,8 @@ class UsersTableSeeder extends Seeder
         $id = DB::table('users')->insertGetId(
             array(
                 'name' => 'Ivan',
-                'surname'=> 'Marić',
-                'email' => 'ivan.maric@mail.com',
+                'surname'=> 'Novak',
+                'email' => 'ivan.novak@mail.com',
                 'role' => 1,
                 'password' => Hash::make('ivanovasifra'),
             )
