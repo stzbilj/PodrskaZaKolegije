@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Courses;
+use App\Models\Programm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -33,7 +34,7 @@ class CourseController extends Controller
     public function create()
     {
         //
-        return view('course.createForm');
+        return view('course.createForm')->with('programmes', Programm::programmes());
     }
 
     /**
