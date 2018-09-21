@@ -122,6 +122,6 @@
 @endsection
 
 
-@section('page-script')
+@section('footer-scripts')
     <script src="{{ asset('js/register.js') }}" defer></script>
 @endsection

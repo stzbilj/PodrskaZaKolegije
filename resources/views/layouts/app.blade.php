@@ -20,6 +20,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sticky-footer.css') }}" rel="stylesheet">
+    
+    @yield('header-scripts')
 </head>
 <body>
     <div id="app">
@@ -40,6 +42,6 @@
         @include ('layouts.footer')
     </div>
 
-    @yield('page-script')
+    @yield('footer-scripts')
 </body>
 </html>
