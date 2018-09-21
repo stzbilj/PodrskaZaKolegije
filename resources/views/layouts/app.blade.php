@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -24,8 +25,8 @@
     @yield('header-scripts')
 </head>
 <body>
+    @include ('layouts.navbar')
     <div id="app">
-        @include ('layouts.navbar')
 
         <main class="py-4">
             @if ($flash = session('message'))
