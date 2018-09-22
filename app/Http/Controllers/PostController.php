@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Courses;
-use App\Models\Programm;
+use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class CourseController extends Controller
+class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('prof', ['except' => ['index', 'show']]);
-        $this->middleware('cadmin', ['only' => ['edit', 'update', 'destroy']]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +15,6 @@ class CourseController extends Controller
     public function index()
     {
         //
-        return Redirect::action('HomeController@index');
     }
 
     /**
@@ -34,7 +25,6 @@ class CourseController extends Controller
     public function create()
     {
         //
-        return view('course.createForm')->with('programmes', Programm::programmes());
     }
 
     /**
@@ -51,22 +41,21 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show( int $course)
+    public function show(Post $post)
     {
         //
-        return Redirect::action('PostController@index');        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         //
     }
@@ -75,10 +64,10 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -86,10 +75,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         //
     }
