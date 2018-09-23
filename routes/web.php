@@ -19,5 +19,5 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('course', 'CourseController');
 Route::group(['prefix' => 'course/{course}'], function() {
-    Route::resource('posts', 'PostController');
+    Route::resource('posts', 'PostController')->except('create', 'show');
 });

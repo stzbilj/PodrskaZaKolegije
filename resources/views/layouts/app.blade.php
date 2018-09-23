@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sticky-footer.css') }}" rel="stylesheet">
     
@@ -29,17 +30,7 @@
     @include ('layouts.navbar')
     <div id="app">
 
-        <main class="py-4">
-            @if ($flash = session('message'))
-                <div class="container">
-                    <div id="flash-message" class="alert alert-success" role="alert">
-                        {{ $flash }}
-                    </div>
-                </div>
-            @endif
-
-            @yield('content')
-        </main>
+        @yield('content')
 
         @include ('layouts.footer')
     </div>

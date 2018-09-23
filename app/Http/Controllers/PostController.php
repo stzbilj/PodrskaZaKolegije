@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Courses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('prof', ['except' => ['index', 'show']]);
+        $this->middleware('prof', ['except' => ['index']]);
         $this->middleware('cadmin', ['only' => ['edit', 'update', 'destroy']]);
     }
 
@@ -22,17 +23,7 @@ class PostController extends Controller
     public function index( Courses $course)
     {
         //
-        return view('course.posts')/*->with('programmes', Programm::programmes())*/;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('course.posts', ['posts' => $course->getOrderedPosts(), 'course' => $course ]);
     }
 
     /**
@@ -41,20 +32,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Courses $course)
     {
         //
-    }
+        $this->validate($request, [
+            'title' => 'required',
+            'note' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
+        auth()->user()->publish( new Post( [
+            'title' => request('title'), 
+            'note'=> request('note'), 
+            'course_id'=> $course->id] 
+        ));
+
+        return Redirect::action('PostController@index', ['course' => $course]);
     }
 
     /**

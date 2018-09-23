@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Courses;
 
 class User extends Authenticatable
 {
@@ -46,5 +45,13 @@ class User extends Authenticatable
     public function coursesAdmin()
     {
         return $this->belongsToMany(Programm::class, 'admin_course', 'user_id', 'course_id');
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
+    public function publish(Post $post) {
+        return $this->posts()->save($post);
     }
 }

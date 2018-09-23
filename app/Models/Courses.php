@@ -19,8 +19,18 @@ class Courses extends Model
         return $this->belongsToMany(Programm::class, 'course_programm', 'course_id', 'programm_id')->withPivot('year');
     }
 
-    public function viewes()
+    public function views()
     {
         return $this->hasMany(CourseView::class, 'course_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'course_id');
+    }
+
+    public function getOrderedPosts()
+    {
+        return $this->posts()->orderBy('created_at','desc')->paginate(2);
     }
 }

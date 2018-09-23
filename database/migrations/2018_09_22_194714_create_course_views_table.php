@@ -16,7 +16,7 @@ class CreateCourseViewsTable extends Migration
         Schema::create('course_views', function (Blueprint $table) {
             $table->integer('course_id');
             $table->smallInteger('type');
-            $table->meduimText('view');
+            $table->mediumText('view');
             $table->timestamps();
         });
     }
