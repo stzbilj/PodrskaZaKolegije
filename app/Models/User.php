@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Courses;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,9 +33,12 @@ class User extends Authenticatable
         return $this->role === 0;
     }
 
-    public function isAdmin( $course_id )
+    public function isAdmin( $course )
     {
-        return in_array( $course_id, $this->coursesAdmin->pluck('id')->toArray());
+        if( $course instanceof Courses) {
+            return in_array( $course->id, $this->coursesAdmin->pluck('id')->toArray());
+        }
+        return in_array( $course, $this->coursesAdmin->pluck('id')->toArray());
     }
 
     public function info()

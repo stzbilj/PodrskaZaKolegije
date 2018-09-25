@@ -12,7 +12,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('prof', ['except' => ['index']]);
-        $this->middleware('cadmin', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('cadmin', ['only' => ['store', 'update', 'destroy']]);
     }
 
     /**
@@ -23,7 +23,7 @@ class PostController extends Controller
     public function index( Courses $course)
     {
         //
-        return view('course.posts', ['posts' => $course->getOrderedPosts(), 'course' => $course ]);
+        return view('posts.index', ['posts' => $course->getOrderedPosts(), 'course' => $course ]);
     }
 
     /**
@@ -49,16 +49,6 @@ class PostController extends Controller
         return Redirect::action('PostController@index', ['course' => $course]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +57,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Courses $course, Post $post)
     {
         //
+        var_dump($request);
     }
 
     /**
