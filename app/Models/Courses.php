@@ -31,6 +31,6 @@ class Courses extends Model
 
     public function getOrderedPosts()
     {
-        return $this->posts()->orderBy('created_at','desc')->paginate(2);
+        return $this->posts()->orderBy('created_at','desc')->paginate(10);
     }
 }

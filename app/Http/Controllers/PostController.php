@@ -12,7 +12,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('prof', ['except' => ['index']]);
-        $this->middleware('cadmin', ['only' => ['store', 'update', 'destroy']]);
+        $this->middleware('cadmin', ['except' => ['index']]);
     }
 
     /**
@@ -60,7 +60,17 @@ class PostController extends Controller
     public function update(Request $request, Courses $course, Post $post)
     {
         //
-        var_dump($request);
+        $this->validate($request, [
+            'title' => 'required',
+            'note' => 'required'
+        ]);
+
+        $post->title = request('title');
+        $post->note = request('note');
+
+        $post->save();
+
+        return Redirect::action('PostController@index', ['course' => $course]);
     }
 
     /**
@@ -69,8 +79,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Courses $course, Post $post)
     {
         //
+        $post->delete();
+        
+        return Redirect::action('PostController@index', ['course' => $course]);
     }
 }

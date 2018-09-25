@@ -6,8 +6,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <form id="edit-form" action="" method="POST">
-      		{{method_field('PATCH')}}
-      		{{csrf_field()}}
+        @method('PATCH')
+        @csrf
+
 	      <div class="modal-body">
 	      		<input type="hidden" name="id" id="modal-id" value="" required>
             <div class="form-group row">
