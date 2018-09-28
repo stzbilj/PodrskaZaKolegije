@@ -9,7 +9,7 @@
         @include('layouts.sidebar')
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course_view->course_id ) ) )
-            <form action="{{ route('opentext.update', ['course' => $course_view->course_id, 'type' => $course_view->type]) }}" method="POST">
+            <form action="{{ route('courseview.update', ['course' => $course_view->course_id, 'type' => $course_view->type]) }}" method="POST">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">

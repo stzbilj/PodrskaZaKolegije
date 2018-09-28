@@ -26,12 +26,24 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Smjerovi') }}</label>
+                        <label for="orientation" class="col-md-3 col-form-label text-md-right">{{ __('Smjerovi') }}</label>
                         <div class="col-md-8">
                             @foreach ($programmes as $programm)
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck{{ $programm->id }}" value="{{ $programm->id }}">
-                                <label class="custom-control-label" for="customCheck{{ $programm->id }}">{{ $programm->name }}; {{ $programm->type }} {{ __('studij') }}</label>
+                                <input type="checkbox" class="custom-control-input" id="programmCheck{{ $programm->id }}" value="{{ $programm->id }}">
+                                <label class="custom-control-label" for="programmCheck{{ $programm->id }}">{{ $programm->name }}; {{ $programm->type }} {{ __('studij') }}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exams" class="col-md-3 col-form-label text-md-right">{{ __('Vrste ispita') }}</label>
+                        <div class="col-md-8">
+                            @foreach ($exams as $exam)
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="examCheck{{ $exam->id }}" value="{{ $exam->id }}">
+                                <label class="custom-control-label" for="examCheck{{ $exam->id }}">{{ $exam->name }}</label>
                             </div>
                             @endforeach
                         </div>

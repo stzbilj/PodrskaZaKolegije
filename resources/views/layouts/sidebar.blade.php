@@ -6,15 +6,15 @@
               Obavijesti{!! Request::routeIs('posts.index') ? '<span class="sr-only">(current)</span>' : '' !!}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light {{ (Request::routeIs('opentext.show') && Request::route('type') == 1) ? 'active' : '' }}"
-                href="{{ route('opentext.show', ['course' => Request::route('course'), 'type' => 1]) }}">
-              O kolegiju{!! Request::routeIs('opentext.show') && Request::route('type') == 1 ? '<span class="sr-only">(current)</span>' : '' !!}
+            <a class="nav-link text-light {{ (Request::routeIs('courseview.show') && Request::route('type') == 1) ? 'active' : '' }}"
+                href="{{ route('courseview.show', ['course' => Request::route('course'), 'type' => 1]) }}">
+              O kolegiju{!! Request::routeIs('courseview.show') && Request::route('type') == 1 ? '<span class="sr-only">(current)</span>' : '' !!}
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light {{ (Request::routeIs('opentext.show') && Request::route('type') == 2) ? 'active' : '' }}" 
-                href="{{ route('opentext.show', ['course' => Request::route('course'), 'type' => 2]) }}">
-              Materijali{!! (Request::routeIs('opentext.show') && Request::route('type') == 2) ? '<span class="sr-only">(current)</span>' : '' !!}
+            <a class="nav-link text-light {{ (Request::routeIs('courseview.show') && Request::route('type') == 2) ? 'active' : '' }}" 
+                href="{{ route('courseview.show', ['course' => Request::route('course'), 'type' => 2]) }}">
+              Materijali{!! (Request::routeIs('courseview.show') && Request::route('type') == 2) ? '<span class="sr-only">(current)</span>' : '' !!}
             </a>
           </li>
           <li class="nav-item">

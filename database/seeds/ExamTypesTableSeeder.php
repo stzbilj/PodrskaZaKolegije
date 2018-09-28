@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ExamTypesSeeder.php extends Seeder
+class ExamTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class ExamTypesSeeder.php extends Seeder
     public function run()
     {
         //
-         DB::table('exam_types')->insert(
+        DB::table('exam_types')->insert(
             array(
                 array( 
                     'name' => 'Prvi kolokvij'
@@ -35,10 +35,10 @@ class ExamTypesSeeder.php extends Seeder
 
         foreach ($courseIds as $value) {
             foreach ($examIds as $value2) {
-                DB::table('course_exam')->insert(
+                DB::table('course_exams')->insert(
                     array(
                         'course_id' => $value,
-                        'user_id' => $value2
+                        'type_id' => $value2
                     )
                 );
             }

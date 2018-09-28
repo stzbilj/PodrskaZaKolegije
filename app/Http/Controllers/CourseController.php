@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Courses;
 use App\Models\Programm;
+use \App\Models\ExamType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -34,7 +35,7 @@ class CourseController extends Controller
     public function create()
     {
         //
-        return view('course.createForm')->with('programmes', Programm::programmes());
+        return view('course.createForm', ['programmes' => Programm::programmes(), 'exams' => ExamType::examTypes()]);
     }
 
     /**
@@ -51,7 +52,7 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Courses  $course
      * @return \Illuminate\Http\Response
      */
     public function show( Courses $course)
@@ -63,10 +64,10 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Courses  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( Courses $course )
     {
         //
     }
@@ -75,10 +76,10 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Courses  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Courses $course)
     {
         //
     }
@@ -86,10 +87,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Courses  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Courses $course)
     {
         //
     }
