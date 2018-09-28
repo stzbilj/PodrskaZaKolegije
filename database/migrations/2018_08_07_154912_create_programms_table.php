@@ -42,7 +42,7 @@ class CreateProgrammsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('programms');
         Schema::dropIfExists('course_programm');
+        Schema::dropIfExists('programms');
     }
 }
