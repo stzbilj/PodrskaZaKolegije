@@ -19,9 +19,14 @@ class CreateCoursesTable extends Migration
         });
 
         Schema::create('admin_course', function (Blueprint $table) {
-            $table->integer('course_id');
-            $table->integer('user_id');
+            $table->integer('course_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->primary(['course_id', 'user_id']);
+        });
+        
+        Schema::table('admin_course', function($table) {
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -14,8 +14,12 @@ class CreateStudentsInfosTable extends Migration
     public function up()
     {
         Schema::create('students_infos', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->integer('JMBAG')->unique();
+        });
+        
+        Schema::table('students_infos', function($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

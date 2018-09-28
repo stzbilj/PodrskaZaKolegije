@@ -14,11 +14,15 @@ class CreateCourseViewsTable extends Migration
     public function up()
     {
         Schema::create('course_views', function (Blueprint $table) {
-            $table->integer('course_id');
+            $table->integer('course_id')->unsigned();
             $table->smallInteger('type');
             $table->mediumText('view');
             $table->timestamps();
             $table->primary(['course_id', 'type']);
+        });
+        
+        Schema::table('course_views', function($table) {
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

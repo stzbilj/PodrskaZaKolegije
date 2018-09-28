@@ -21,11 +21,18 @@ class CreateProgrammsTable extends Migration
         });
 
         Schema::create('course_programm', function (Blueprint $table) {
-            $table->integer('course_id');
-            $table->integer('programm_id');
+            $table->integer('course_id')->unsigned();
+            $table->integer('programm_id')->unsigned();
             $table->integer('year');
             $table->primary(['course_id', 'programm_id']);
         });
+        
+        Schema::table('course_programm', function($table) {
+            $table->foreign('programm_id')->references('id')->on('programms')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+        });
+
+        
     }
 
     /**
