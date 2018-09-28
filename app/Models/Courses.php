@@ -33,4 +33,8 @@ class Courses extends Model
     {
         return $this->posts()->orderBy('created_at','desc')->paginate(10);
     }
+
+    public function addView(CourseView $course_view) {
+        return $this->views()->save($course_view);
+    }
 }

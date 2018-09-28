@@ -12,7 +12,7 @@
                 @include('posts.create')
                 @endif
                 @foreach ($posts as $post)
-                @include('posts.show');
+                @include('posts.show')
                 @endforeach
                 {{ $posts->links('vendor.pagination.bootstrap-4')}}
             </div>

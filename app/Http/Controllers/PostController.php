@@ -11,7 +11,6 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('prof', ['except' => ['index']]);
         $this->middleware('cadmin', ['except' => ['index']]);
     }
 

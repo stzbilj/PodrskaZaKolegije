@@ -18,6 +18,7 @@ class CreateCourseViewsTable extends Migration
             $table->smallInteger('type');
             $table->mediumText('view');
             $table->timestamps();
+            $table->primary(['course_id', 'type']);
         });
     }
 
