@@ -11,4 +11,9 @@ class ExamType extends Model
     {
         return static::all();
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Courses::class, 'course_exams', 'type_id', 'course_id');
+    }
 }

@@ -17,6 +17,7 @@ class CreateExamsTable extends Migration
             $table->increments('id');
             $table->integer('type_id')->unsigned();
             $table->string('path', 128);
+            $table->string('year', 20);
             $table->timestamps();
         });
 

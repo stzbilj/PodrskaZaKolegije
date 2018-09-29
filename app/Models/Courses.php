@@ -37,4 +37,8 @@ class Courses extends Model
     public function addView(CourseView $course_view) {
         return $this->views()->save($course_view);
     }
+
+    public function examsTypes() {
+        return $this->belongsToMany(ExamType::class, 'course_exams', 'course_id', 'type_id');
+    }
 }
