@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exam;
+use App\Models\Exam;
+use App\Models\Courses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 
 class ExamController extends Controller
 {
@@ -12,9 +15,10 @@ class ExamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Courses $course)
     {
         //
+        return view('exams.index');
     }
 
     /**

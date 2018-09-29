@@ -18,9 +18,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light {{ Request::routeIs('/') ? 'active' : '' }}"
-                href="#">
-              Zadaci{!! Request::routeIs('/') ? '<span class="sr-only">(current)</span>' : '' !!}
+            <a class="nav-link text-light {{ Request::routeIs('exams.index') ? 'active' : '' }}"
+                href="{{ route('exams.index', ['course' => Request::route('course')]) }}">
+              Zadaci{!! Request::routeIs('exams.index') ? '<span class="sr-only">(current)</span>' : '' !!}
             </a>
           </li>
           @if ( Auth::check() )

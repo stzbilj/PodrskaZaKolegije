@@ -16,11 +16,13 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('home', 'HomeController@index');
 
-
 Route::resource('course', 'CourseController');
+
 Route::group(['prefix' => 'course/{course}'], function() {
     Route::resource('posts', 'PostController')->except('create', 'show', 'edit');
     
     Route::get('about/{type}', 'CourseViewController@show')->name('courseview.show');
-    Route::match(['put', 'patch' ], 'about/{type}', 'CourseViewController@update')->name('courseview.update');    
+    Route::match(['put', 'patch' ], 'about/{type}', 'CourseViewController@update')->name('courseview.update');
+
+    Route::resource('exams', 'ExamController')->only('index', 'store', 'destroy');
 });

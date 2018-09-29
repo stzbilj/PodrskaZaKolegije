@@ -26,5 +26,5 @@
 @endsection
 
 @section('footer-scripts')
-<script src="{{ asset('js/modal.js') }}" defer></script>
+<script src="{{ asset('js/modalPosts.js') }}" defer></script>
 @endsection
