@@ -6,7 +6,7 @@
     @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
     <button id="edit-item" class="btn btn-info" data-title="{{$post->title}}" data-note="{{$post->note}}" 
     data-postid={{$post->id}} data-action="{{route('posts.update', ['course' => $course->id, 'post'=> $post->id])}}">Uredi</button>
-    <button id="delete-item" class="btn btn-danger" data-action="{{route('posts.destroy', ['course' => $course->id, 'post'=> $post->id])}}">Obriši</button>
+    <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati obavijest?" data-action="{{route('posts.destroy', ['course' => $course->id, 'post'=> $post->id])}}">Obriši</button>
     @endif
 </div>
 <hr>

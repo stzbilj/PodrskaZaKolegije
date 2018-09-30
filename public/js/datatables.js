@@ -23,6 +23,8 @@ $(document).ready( function () {
                 "sortAscending":  ": aktiviraj za uzlazno sortiranje",
                 "sortDescending": ": aktiviraj za silazno sortiranje"
             }
-        }
+        },
+        "displayLength": 5,
+        "lengthMenu": [[5, 10, 15], [5, 10, 15]]
     });
 } )

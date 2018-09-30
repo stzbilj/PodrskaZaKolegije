@@ -18,7 +18,7 @@
             </div>
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
                 @include('posts.editModal')
-                @include('posts.deleteModal')
+                @include('layouts.deleteModal')
             @endif
         </main>
     </div>
@@ -27,4 +27,5 @@
 
 @section('footer-scripts')
 <script src="{{ asset('js/modalPosts.js') }}" defer></script>
+<script src="{{ asset('js/modalDelete.js') }}" defer></script>
 @endsection

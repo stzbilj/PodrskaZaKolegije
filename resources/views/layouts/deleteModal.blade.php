@@ -2,15 +2,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title text-center" id="myModalLabel">Potvrda brisanja</h4>
+            <h4 class="modal-title text-center" id="deleteModalLabel">Potvrda brisanja</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <form id="delete-form" action="" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-body">
-              <p class="text-center">
-                Jeste li sigurni da želite pobrisati obavijest?
+              <p id="delete-text" class="text-center">
               </p>
             </div>
             <div class="modal-footer">
