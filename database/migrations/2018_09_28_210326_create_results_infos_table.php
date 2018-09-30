@@ -15,6 +15,7 @@ class CreateResultsInfosTable extends Migration
     {
         Schema::create('results_infos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('course_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->string('header', 256);
             $table->text('comment');
@@ -22,7 +23,8 @@ class CreateResultsInfosTable extends Migration
         });
 
         Schema::table('results_infos', function($table) {
-            $table->foreign('type_id')->references('id')->on('course_exams')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('exam_types')->onDelete('cascade');
         });
     }
 

@@ -15,6 +15,7 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('course_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->string('path', 128);
             $table->string('year', 20);
@@ -22,7 +23,8 @@ class CreateExamsTable extends Migration
         });
 
         Schema::table('exams', function($table) {
-            $table->foreign('type_id')->references('id')->on('course_exams')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('exam_types')->onDelete('cascade');
         });
     }
 
