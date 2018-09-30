@@ -11,7 +11,8 @@ class CourseView extends Model
         'view', 'type'
     ];
 
-    public static function getByCourseAndType($course_id, $type) {
+    public static function getByCourseAndType($course_id, $type)
+    {
         return static::where(['course_id' => $course_id, 'type' => $type])->first();
     }
 }

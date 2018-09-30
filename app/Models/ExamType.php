@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ExamType extends Model
 {
     //
+    public $timestamps = false;
+
     public static function examTypes()
     {
         return static::all();

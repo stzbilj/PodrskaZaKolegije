@@ -51,11 +51,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Programm::class, 'admin_course', 'user_id', 'course_id');
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function publish(Post $post) {
+    public function publish(Post $post)
+    {
         return $this->posts()->save($post);
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Results::class);
     }
 }

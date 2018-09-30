@@ -34,11 +34,33 @@ class Courses extends Model
         return $this->posts()->orderBy('created_at','desc')->paginate(10);
     }
 
-    public function addView(CourseView $course_view) {
+    public function addView(CourseView $course_view)
+    {
         return $this->views()->save($course_view);
     }
 
-    public function examsTypes() {
+    public function examsTypes()
+    {
         return $this->belongsToMany(ExamType::class, 'course_exams', 'course_id', 'type_id');
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'course_id');
+    }
+
+    public function resultsInfos()
+    {
+        return $this->hasMany(ResultsInfo::class, 'course_id');
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class, 'course_id');
+    }
+
+    public function getAssignmentsByType(bool $additional)
+    {
+        return $this->assignments()->where('additional', $additional)->get();
     }
 }

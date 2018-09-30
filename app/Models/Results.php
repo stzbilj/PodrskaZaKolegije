@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Results extends Model
 {
     //
+    private $timestamps = false;
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
