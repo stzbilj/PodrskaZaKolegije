@@ -25,4 +25,5 @@ Route::group(['prefix' => 'course/{course}'], function() {
     Route::match(['put', 'patch' ], 'about/{type}', 'CourseViewController@update')->name('courseview.update');
 
     Route::resource('exams', 'ExamController')->only('index', 'store', 'destroy');
+    Route::resource('assignments', 'ExamController')->only('store', 'destroy');
 });

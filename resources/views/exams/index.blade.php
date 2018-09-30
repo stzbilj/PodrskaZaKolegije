@@ -27,7 +27,7 @@
                         <th>Akademska godina</th>
                         <th>Kolkokvij</th>
                         <th>Objavljeno</th>
-                        @if (Auth::check() && Auth::user()->isAdmin($course_id))
+                        @if (Auth::check() && Auth::user()->isAdmin($course))
                         <th>Brisanje</th>                            
                         @endif
                     </tr>
@@ -36,7 +36,7 @@
                     @foreach ($exams as $exam)
                     <tr>
                         <td>{{ $exam->year }}</td>
-                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $exam->path }}">Link</a></td>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $exam->path }}">{{ $exam->type->name }}</a></td>
                         <td>{{ $exam->created_at->format('d.m.Y')}}</td>
                         @if (Auth::check() && Auth::user()->isAdmin($course_id))
                         <td>
@@ -57,43 +57,49 @@
                         <th>Zadatak</th>
                         <th>Datum objave</th>
                         @if (Auth::check() && Auth::user()->isAdmin($course_id))
-                        <th>
-                            <button id="delete-assignment" class="btn btn-danger" data-action="{{route('posts.destroy', ['course' => $course->id, 'post'=> $post->id])}}">Obriši</button>
-                        </th>                            
+                        <th>Brisanje</th>                            
                         @endif
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($assignments as $assignment)
                     <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $assignment->path }}">{{ $assignment->link_text }}</a></td>
+                        <td>{{ $assignment->created_at->format('d.m.Y')}}</td>
                         @if (Auth::check() && Auth::user()->isAdmin($course_id))
                         <td>
-                            <button id="delete-assignment" class="btn btn-danger" data-action="{{route('posts.destroy', ['course' => $course->id, 'post'=> $post->id])}}">Obriši</button>                
+                            <button id="delete-assignment" class="btn btn-danger" data-action="{{route('assigment.destroy', ['course' => $course->id, 'assignment'=> $assignment->id])}}">Obriši</button>
                         </td>                            
                         @endif
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
             <h4>Dodatni zadaci</h4>
-            <thead>
-                <tr>
-                    <th>Zadatak</th>
-                    <th>Datum objave</th>
-                    @if (Auth::check() && Auth::user()->isAdmin($course_id))
-                    <th>Brisanje</th>                            
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                    @if (Auth::check() && Auth::user()->isAdmin($course_id))
-                    <td>Brisanje</td>                            
-                    @endif
-                </tr>
-            </tbody>
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Zadatak</th>
+                        <th>Datum objave</th>
+                        @if (Auth::check() && Auth::user()->isAdmin($course_id))
+                        <th>Brisanje</th>                            
+                        @endif
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($additionals as $additional)
+                    <tr>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $additional->path }}">{{ $additional->link_text }}</a></td>
+                        <td>{{ $additional->created_at->format('d.m.Y')}}</td>
+                        @if (Auth::check() && Auth::user()->isAdmin($course_id))
+                        <td>
+                            <button id="delete-assignment" class="btn btn-danger" data-action="{{route('assigment.destroy', ['course' => $course->id, 'additional'=> $additional->id])}}">Obriši</button>
+                        </td>                            
+                        @endif
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </main>
     </div>
 </div>

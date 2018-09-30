@@ -13,4 +13,9 @@ class Results extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function info()
+    {
+        return $this->belongsTo(ResultsInfo::class, 'info_id');
+    }
 }

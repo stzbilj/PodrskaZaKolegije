@@ -18,8 +18,13 @@ class ExamController extends Controller
     public function index(Courses $course)
     {
         //
-
-        return view('exams.index');
+        $parameters = [
+            'course' => $course,
+            'exams' => $course->exams(),
+            'assignments' => $course->getAssignmentsByType(false),
+            'additionals' => $course->getAssignmentsByType(true)
+        ];
+        return view('exams.index', $parameters);
     }
 
     /**
