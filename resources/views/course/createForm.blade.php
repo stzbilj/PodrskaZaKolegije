@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <h4>Kreiraj novi kolegij</h4>
                 <hr>
-                <form action="{{ route('course.store') }}" method="post">
+                <form action="{{ route('course.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group row">

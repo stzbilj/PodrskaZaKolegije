@@ -6,10 +6,17 @@ use App\Models\Exam;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 
 class ExamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cadmin', ['except' => ['index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,21 +27,11 @@ class ExamController extends Controller
         //
         $parameters = [
             'course' => $course,
-            'exams' => $course->exams(),
+            'exams' => $course->exams,
             'assignments' => $course->getAssignmentsByType(false),
             'additionals' => $course->getAssignmentsByType(true)
         ];
         return view('exams.index', $parameters);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -43,43 +40,28 @@ class ExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Courses $course)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Exam $exam)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Exam $exam)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Exam $exam)
-    {
-        //
+        $this->validate($request, [
+            'year' => 'required',
+            'exam_id' => 'required',
+            'examFile' => 'required|file|mimes:pdf|max:10240'
+        ]);
+        
+        //dd($request->examFile->getClientOriginalName());
+        $custom_file_name = time().'_'.$request->examFile->getClientOriginalName();
+        $directory_name = 'public/'. $course->id . '_' . $course->name;
+        $path = $request->examFile->storeAs($directory_name ,$custom_file_name);
+        
+        Exam::create([
+            'course_id' => $course->id,
+            'type_id' => $request->exam_id,
+            'year' => $request->year,
+            'path'=> $path
+        ]);
+        
+        return Redirect::action('ExamController@index', ['course' => $course]);
     }
 
     /**
@@ -88,8 +70,12 @@ class ExamController extends Controller
      * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam $exam)
+    public function destroy(Courses $course, Exam $exam)
     {
         //
+        Storage::delete($exam->path);
+        $exam->delete();
+
+        return Redirect::action('ExamController@index', ['course' => $course]);
     }
 }

@@ -19,15 +19,15 @@
             <h4>Kolkoviji</h4>
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
             <div class="btn-group btn-margine">
-                <button id="create-exam" class="btn btn-primary" data-types=""
-                data-action="{{route('exams.store', ['course' => $course->id])}}">Novi kolokvij</button>
+                <button id="create-exam" class="btn btn-primary" data-types="{{ $course->examsTypes->toJson() }}"
+                    data-action="{{route('exams.store', ['course' => $course->id])}}">Novi kolokvij</button>
             </div>
             @endif
             <table class="datatable table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Akademska godina</th>
-                        <th>Kolkokvij</th>
+                        <th>Kolokvij</th>
                         <th>Objavljeno</th>
                         @if (Auth::check() && Auth::user()->isAdmin($course))
                         <th>Brisanje</th>                            
@@ -38,11 +38,11 @@
                     @foreach ($exams as $exam)
                     <tr>
                         <td>{{ $exam->year }}</td>
-                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $exam->path }}">{{ $exam->type->name }}</a></td>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ Storage::url($exam->path) }}">{{ $exam->type->name }}</a></td>
                         <td>{{ $exam->created_at->format('d.m.Y')}}</td>
-                        @if (Auth::check() && Auth::user()->isAdmin($course_id))
+                        @if (Auth::check() && Auth::user()->isAdmin($course->id))
                         <td>
-                            <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati zadatak?" data-action="{{route('exams.destroy', ['course' => $course->id, 'exam'=> $exam->id])}}">Obriši</button>                            
+                            <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati zadatak?" data-action="{{route('exams.destroy', ['course' => $course->id, 'exam'=> $exam->id])}}">Obriši</button>
                         </td>                            
                         @endif
                     </tr>
@@ -104,6 +104,8 @@
                     @endforeach
                 </tbody>
             </table>
+            @include('exams.createExamModal')
+            @include('layouts.deleteModal')
         </main>
     </div>
 </div>
@@ -112,4 +114,5 @@
 @section('footer-scripts')
 <script src="{{ asset('js/datatables.js') }}" defer></script>
 <script src="{{ asset('js/modalDelete.js') }}" defer></script>
+<script src="{{ asset('js/modalExams.js') }}" defer></script>
 @endsection

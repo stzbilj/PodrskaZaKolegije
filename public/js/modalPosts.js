@@ -17,13 +17,11 @@ $(document).ready(function() {
       var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
  
       // get the data
-      var id = el.data('postid');
       var title = el.data('title');
       var note = el.data('note');
       var action = el.data('action');
   
       // fill the data in the input fields
-      $("#modal-id").val(id);
       $("#modal-title").val(title);
       $("#modal-note").val(note);
       $('#edit-form').attr('action', action);
