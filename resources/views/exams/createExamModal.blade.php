@@ -9,21 +9,21 @@
           @csrf
   
             <div class="modal-body">
-              <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="year">Akademska godina</label>
-                    <input type="text" class="form-control" name="year" required>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="year">Akademska godina</label>
+                        <input type="text" class="form-control" name="year" required>
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="year">Vrsta kolokvija</label>
-                <div id="radiobuttons">
+                <div class="form-group">
+                    <label for="year">Vrsta kolokvija</label>
+                    <div id="radiobuttons">
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="examFile">Kolokvij(u .pdf formatu)</label>
-                <input type="file" class="form-control-file" id="examFile" name="examFile" required>
-              </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="examFile" name="examFile" required>
+                    <label class="custom-file-label" for="examFile">Kolokvij(u .pdf formatu)</label>
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
