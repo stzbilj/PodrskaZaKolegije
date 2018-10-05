@@ -47,34 +47,30 @@ $(document).ready(function() {
 
 
 
-    // $(document).on('click', "#edit-item", function() {
-    //   $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+    $(document).on('click', "#create-assignment", function() {
+      $(this).addClass('create-assignment-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
   
-    //   var options = {
-    //     'backdrop': 'static'
-    //   };
-    //   $('#edit-modal').modal(options)
-    // })
+      var options = {
+        'backdrop': 'static'
+      };
+      $('#create-assignment-modal').modal(options)
+    })
   
-    // // on modal show
-    // $('#edit-modal').on('show.bs.modal', function() {
-    //   var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+    // on modal show
+    $('#create-assignment-modal').on('show.bs.modal', function() {
+      var el = $(".create-assignment-trigger-clicked"); // See how its usefull right here? 
  
-    //   // get the data
-    //   var title = el.data('title');
-    //   var note = el.data('note');
-    //   var action = el.data('action');
+      // get the data
+      var action = el.data('action');
   
-    //   // fill the data in the input fields
-    //   $("#modal-title").val(title);
-    //   $("#modal-note").val(note);
-    //   $('#edit-form').attr('action', action);
+      // fill the data in the input fields
+      $('#create-assignment-form').attr('action', action);
   
-    // })
+    })
   
-    // // on modal hide
-    // $('#edit-modal').on('hide.bs.modal', function() {
-    //   $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-    //   $("#edit-form").trigger("reset");
-    // })
+    // on modal hide
+    $('#create-assignment-modal').on('hide.bs.modal', function() {
+      $('.create-assignment-trigger-clicked').removeClass('create-assignment-trigger-clicked')
+      $("#create-assignment-form").trigger("reset");
+    })
   })

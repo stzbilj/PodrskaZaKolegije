@@ -93,5 +93,6 @@ class CourseController extends Controller
     public function destroy(Courses $course)
     {
         //
+        // Storage::deleteDirectory($directory);
     }
 }

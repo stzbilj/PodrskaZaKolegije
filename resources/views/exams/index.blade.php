@@ -18,7 +18,7 @@
 
             <h4>Kolkoviji</h4>
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
-            <div class="btn-group btn-margine">
+            <div class="btn-group btn-margin">
                 <button id="create-exam" class="btn btn-primary" data-types="{{ $course->examsTypes->toJson() }}"
                     data-action="{{route('exams.store', ['course' => $course->id])}}">Novi kolokvij</button>
             </div>
@@ -51,10 +51,11 @@
             </table>
             <h4>Domaće zadaće</h4>
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
-            <div class="btn-group btn-margine">
+            <div class="btn-group btn-margin">
                 <button id="create-assignment" class="btn btn-info" data-action="{{route('assignments.store', ['course' => $course->id])}}">Novi zadatak</button>
             </div>
             @endif
+            <div class="row"></div>
             <table class="datatable table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -68,7 +69,7 @@
                 <tbody>
                     @foreach ($assignments as $assignment)
                     <tr>
-                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $assignment->path }}">{{ $assignment->link_text }}</a></td>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ Storage::url($assignment->path ) }}">{{ $assignment->link_text }}</a></td>
                         <td>{{ $assignment->created_at->format('d.m.Y')}}</td>
                         @if (Auth::check() && Auth::user()->isAdmin($course))
                         <td>
@@ -93,7 +94,7 @@
                 <tbody>
                     @foreach ($additionals as $additional)
                     <tr>
-                        <td><a target="_blank" rel="noopener noreferrer" href="{{ $additional->path }}">{{ $additional->link_text }}</a></td>
+                        <td><a target="_blank" rel="noopener noreferrer" href="{{ Storage::url($additional->path) }}">{{ $additional->link_text }}</a></td>
                         <td>{{ $additional->created_at->format('d.m.Y')}}</td>
                         @if (Auth::check() && Auth::user()->isAdmin($course))
                         <td>
@@ -105,6 +106,7 @@
                 </tbody>
             </table>
             @include('exams.createExamModal')
+            @include('exams.createAssignmentModal')
             @include('layouts.deleteModal')
         </main>
     </div>

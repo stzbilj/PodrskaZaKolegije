@@ -10,7 +10,6 @@
         @csrf
 
 	      <div class="modal-body">
-	      		<input type="hidden" name="id" id="modal-id" value="" required>
             <div class="form-group row">
               <div class="col-sm-12">
                   <input id="modal-title" type="text" class="form-control" name="title" placeholder="Ovdje upišite naslov" required>

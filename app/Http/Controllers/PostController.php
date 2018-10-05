@@ -35,8 +35,8 @@ class PostController extends Controller
     {
         //
         $this->validate($request, [
-            'title' => 'required',
-            'note' => 'required'
+            'title' => 'required|string|max:128',
+            'note' => 'required|string'
         ]);
 
         auth()->user()->publish( new Post( [
@@ -60,8 +60,8 @@ class PostController extends Controller
     {
         //
         $this->validate($request, [
-            'title' => 'required',
-            'note' => 'required'
+            'title' => 'required|string|max:128',
+            'note' => 'required|string'
         ]);
 
         $post->title = request('title');

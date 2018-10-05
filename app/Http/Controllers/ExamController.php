@@ -44,14 +44,14 @@ class ExamController extends Controller
     {
         //
         $this->validate($request, [
-            'year' => 'required',
-            'exam_id' => 'required',
+            'year' => 'required|string|max:20',
+            'exam_id' => 'required|integer',
             'examFile' => 'required|file|mimes:pdf|max:10240'
         ]);
         
         //dd($request->examFile->getClientOriginalName());
         $custom_file_name = time().'_'.$request->examFile->getClientOriginalName();
-        $directory_name = 'public/'. $course->id . '_' . $course->name;
+        $directory_name = 'public/'. $course->id . '_' . $course->name . '/exams';
         $path = $request->examFile->storeAs($directory_name ,$custom_file_name);
         
         Exam::create([
