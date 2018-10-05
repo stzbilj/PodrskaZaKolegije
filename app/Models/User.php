@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isStudent()
+    {        
+        return $this->role === 1;
+    }
+
     public function isProfessor()
     {        
         return $this->role === 0;
@@ -43,7 +48,7 @@ class User extends Authenticatable
 
     public function info()
     {
-        return $this->hasOne('App\Models\StudentsInfo');
+        return $this->hasOne(StudentsInfo::class);
     }
 
     public function coursesAdmin()

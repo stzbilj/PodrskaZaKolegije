@@ -15,7 +15,7 @@ class ResultsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Courses $course)
     {
         //
     }
@@ -25,7 +25,7 @@ class ResultsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Courses $course)
     {
         //
     }
@@ -36,18 +36,21 @@ class ResultsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Courses $course)
     {
         //
+        // dd($request->examFile->getPathName());
+
     }
 
+    // Prikazuje tablicu sa uploadanim podacima
     /**
      * Display the specified resource.
      *
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function show(Results $results)
+    public function show(Results $results, Courses $course)
     {
         //
     }
@@ -58,7 +61,7 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function edit(Results $results)
+    public function edit(Results $results, Courses $course)
     {
         //
     }
@@ -70,7 +73,7 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Results $results)
+    public function update(Request $request, Courses $course, Results $results)
     {
         //
     }
@@ -81,7 +84,7 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Results $results)
+    public function destroy(Results $results, Courses $course)
     {
         //
     }

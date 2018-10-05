@@ -8,18 +8,14 @@
             <h1>Obavijesti</h1>
     
             <div class="col-sm-12 blog-main">
-                @if ( ( Auth::check() && Auth::user()->isAdmin( $course->id ) ) )
-                @include('posts.create')
-                @endif
+                @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course->id ) ), 'posts.create')
                 @foreach ($posts as $post)
                 @include('posts.show')
                 @endforeach
                 {{ $posts->links('vendor.pagination.bootstrap-4')}}
             </div>
-            @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
-                @include('posts.editModal')
-                @include('layouts.deleteModal')
-            @endif
+            @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course->id ) ), 'posts.editModal')
+            @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course->id ) ), 'layouts.deleteModal')
         </main>
     </div>
 </div>

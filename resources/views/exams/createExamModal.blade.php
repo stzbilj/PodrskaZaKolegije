@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="year">Vrsta kolokvija</label>
+                    <label for="radiobuttons">Vrsta kolokvija</label>
                     <div id="radiobuttons">
                     </div>
                 </div>

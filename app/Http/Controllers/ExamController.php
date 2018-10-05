@@ -48,8 +48,7 @@ class ExamController extends Controller
             'exam_id' => 'required|integer',
             'examFile' => 'required|file|mimes:pdf|max:10240'
         ]);
-        
-        //dd($request->examFile->getClientOriginalName());
+
         $custom_file_name = time().'_'.$request->examFile->getClientOriginalName();
         $directory_name = 'public/'. $course->id . '_' . $course->name . '/exams';
         $path = $request->examFile->storeAs($directory_name ,$custom_file_name);

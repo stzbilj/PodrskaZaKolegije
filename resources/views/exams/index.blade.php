@@ -105,9 +105,11 @@
                     @endforeach
                 </tbody>
             </table>
-            @include('exams.createExamModal')
-            @include('exams.createAssignmentModal')
-            @include('layouts.deleteModal')
+            @if (Auth::check() && Auth::user()->isAdmin($course))
+                @include('exams.createExamModal')
+                @include('exams.createAssignmentModal')
+                @include('layouts.deleteModal')
+            @endif
         </main>
     </div>
 </div>
