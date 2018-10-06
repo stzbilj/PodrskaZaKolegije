@@ -5,9 +5,10 @@
     <div class="row">
         @include('layouts.sidebar')
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Rezultati {{ $results_info->examType->name }}</h1>
+            <h1>Rezultati</h1>
     
             <div class="col-sm-12 blog-main">
+                <h2 class="blog-post-title">{{ $results_info->examType->name }}</h2>  
                 <p class="blog-post-meta">Datum objave: {{ $results_info->created_at->format('d.m.Y H:i') }}</p>
                 <a href="{{ url()->previous() }}" class="btn btn-primary" role="button">Natrag</a>
                 <p><strong>Komentar:</strong> {{ $results_info->comment }}</p> 
