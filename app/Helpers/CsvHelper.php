@@ -5,7 +5,7 @@ namespace App\Helpers;
 class CsvHelper
 {
     public static function getFileDelimiter($filename, $checkLines = 2){
-        $file = new SplFileObject($filename);
+        $file = new \SplFileObject($filename);
         $delimiters = array(
           ',',
           '\t',
