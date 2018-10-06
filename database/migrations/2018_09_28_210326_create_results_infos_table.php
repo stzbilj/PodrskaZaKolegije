@@ -18,7 +18,7 @@ class CreateResultsInfosTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->string('header', 256);
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
 

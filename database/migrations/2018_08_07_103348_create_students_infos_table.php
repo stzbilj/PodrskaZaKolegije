@@ -15,7 +15,7 @@ class CreateStudentsInfosTable extends Migration
     {
         Schema::create('students_infos', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->integer('JMBAG')->unique();
+            $table->integer('JMBAG')->unsigned()->unique();
         });
         
         Schema::table('students_infos', function($table) {
