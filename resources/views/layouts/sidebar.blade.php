@@ -25,9 +25,9 @@
           </li>
           @if ( Auth::check() )
           <li class="nav-item">
-            <a class="nav-link text-light {{ Request::routeIs('/') ? 'active' : '' }}"
-                href="#">
-              Rezultati{!! Request::routeIs('/') ? '<span class="sr-only">(current)</span>' : '' !!}
+            <a class="nav-link text-light {{ Request::routeIs('results.index') ? 'active' : '' }}"
+                href="{{ route('results.index', ['course' => Request::route('course')]) }}">
+              Rezultati{!! Request::routeIs('results.index') ? '<span class="sr-only">(current)</span>' : '' !!}
             </a>
           </li>
           @if (Auth::user()->isAdmin( Request::route('course') ) )

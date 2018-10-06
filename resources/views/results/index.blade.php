@@ -12,7 +12,7 @@
                 @include('results.create')
                 @include('results.adminShow')  
                 @else
-                @include('results.show')
+                @include('results.studentShow')
                 @endif
             </div>
             @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course ) ), 'layouts.deleteModal')

@@ -16,7 +16,7 @@
               </div>
               <div class="form-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="assignmentFile" name="assignmentFile" required>
+                    <input type="file" class="custom-file-input" id="assignmentFile" name="assignmentFile" onchange="$(this).next().after().text($(this).val().split('\\').slice(-1)[0])"required>
                     <label class="custom-file-label" for="assignmentFile">Zadatak(u .pdf formatu)</label>
                 </div>
               </div>

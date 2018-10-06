@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Results extends Model
 {
     //
-    private $timestamps = false;
+    public $timestamps = false;
+    
+    protected $fillable = [ 
+        'user_id', 'data'
+    ];
     
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(StudentsInfo::class, 'JMBAG','user_id');
     }
 
     public function info()

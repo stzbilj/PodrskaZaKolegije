@@ -63,4 +63,9 @@ class Courses extends Model
     {
         return $this->assignments()->where('additional', $additional)->get();
     }
+
+    public function getResultsInfos()
+    {
+        return $this->resultsInfos()->orderBy('created_at','desc')->paginate(5);
+    }
 }
