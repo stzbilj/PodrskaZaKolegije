@@ -88,9 +88,12 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function show(ResultsInfo $result, Courses $course)
+    public function show(Courses $course, ResultsInfo $result)
     {
         //
+        $result->header = json_decode($result->header); 
+        return view('results.show', ['results_info' => $result, 'results' => $result->results ]);
+
     }
 
     /**
