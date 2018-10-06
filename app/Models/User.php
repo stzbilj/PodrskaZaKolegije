@@ -68,6 +68,6 @@ class User extends Authenticatable
 
     public function results()
     {
-        return $this->hasMany(Results::class);
+        return $this->info->results();
     }
 }

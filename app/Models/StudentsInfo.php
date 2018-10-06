@@ -19,4 +19,9 @@ class StudentsInfo extends Model
     {
         return $this->belongsTo( User::class, 'user_id', 'id');
     }
+
+    public function results()
+    {
+        return $this->hasMany(Results::class, 'user_id', 'JMBAG');
+    }
 }
