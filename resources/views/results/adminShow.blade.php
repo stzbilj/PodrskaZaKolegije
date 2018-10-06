@@ -1,3 +1,4 @@
+<h2 class="blog-post-title">Objavljeni rezultati</h2>
 <table class="table">
     <thead>
         <tr>
@@ -10,10 +11,14 @@
     <tbody>
         @foreach ($results_infos as $results_info)
         <tr>
-            <td>Link</td>
+            <td><a href="{{ route('results.show', ['course' => $course->id, 'result' => $results_info->id ]) }}">{{ $results_info->examType->name}}</a></td>
             <td>{{ $results_info->comment }}</td>
             <td>{{ $results_info->created_at->format('d.m.Y') }}</td>
-            <td>Buttons</td>
+            <td>
+                <button id="edit-result" class="btn btn-info" data-types="{{ $course->examsTypes->toJson() }}" data-type-id={{ $results_info->type_id}} data-note="{{$results_info->comment}}"
+                    data-action="{{route('results.update', ['course' => $course->id, 'result'=> $results_info->id])}}">Uredi</button>
+                <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati rezulate?" data-action="{{route('results.destroy', ['course' => $course->id, 'result'=> $results_info->id])}}">Obriši</button>
+            </td>
         </tr>
         @endforeach
     </tbody>

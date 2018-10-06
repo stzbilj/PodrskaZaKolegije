@@ -27,5 +27,5 @@ Route::group(['prefix' => 'course/{course}'], function() {
     Route::resource('exams', 'ExamController')->only('index', 'store', 'destroy');
     Route::resource('assignments', 'AssignmentController')->only('store', 'destroy');
 
-    Route::resource('results', 'ResultsController')->except('create');
+    Route::resource('results', 'ResultsController')->except('create', 'edit');
 });

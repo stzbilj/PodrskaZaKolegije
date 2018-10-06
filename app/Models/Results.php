@@ -8,7 +8,7 @@ class Results extends Model
 {
     //
     public $timestamps = false;
-    
+
     protected $fillable = [ 
         'user_id', 'data'
     ];
@@ -21,5 +21,10 @@ class Results extends Model
     public function info()
     {
         return $this->belongsTo(ResultsInfo::class, 'info_id');
+    }
+
+    public static function deleteByInfo(int $id )
+    {
+        return self::where('info_id', $id)->delete();
     }
 }

@@ -88,7 +88,7 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function show(ResultsInfo $results, Courses $course)
+    public function show(ResultsInfo $result, Courses $course)
     {
         //
     }
@@ -100,9 +100,53 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Courses $course, ResultsInfo $results)
+    public function update(Request $request, Courses $course, ResultsInfo $result)
     {
         //
+        $this->validate($request, [
+            'exam_id' => 'required|integer',
+            'resultsFile' => 'file|max:10240',
+            'note' => 'nullable|string'
+        ]);
+        
+        $result->type_id = $request->exam_id;
+        $result->comment = $request->note;
+        
+        if( $request->has('resultsFile') ) {
+            $validator = Validator::make(
+                [
+                    'extension' => strtolower($request->resultsFile->getClientOriginalExtension()),
+                ],
+                [   
+                    'extension' => 'required|in:csv',
+                    ]
+            );
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+                
+            if( !$data = CsvHelper::csvToArray($request->resultsFile->getPathName()) ) {
+                throw ValidationException::withMessages([
+                    'resultsFile' => ['Greška pri otvaranju datoteke']
+                ]);
+            }
+
+            Results::deleteByInfo($result->id);
+            
+            $header = [];
+            foreach ($data[0] as $key => $value) {
+                if (strtoupper($key) !== 'JMBAG') {
+                    array_push($header, $key);
+                }
+            }
+
+            $result->header = json_encode( $header );
+                    
+            $result->saveResults($data);
+        }
+        
+        $result->save();
+        return Redirect::action('ResultsController@index', ['course' => $course]);
     }
 
     /**
@@ -111,7 +155,7 @@ class ResultsController extends Controller
      * @param  \App\Results  $results
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $course, ResultsInfo $results)
+    public function destroy(Courses $course, ResultsInfo $result)
     {
         //
         $results->delete();

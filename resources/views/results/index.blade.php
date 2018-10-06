@@ -10,11 +10,13 @@
             <div class="col-sm-12 blog-main">
                 @if ( Auth::check() && Auth::user()->isAdmin( $course ) )
                 @include('results.create')
+                <hr />
                 @include('results.adminShow')  
                 @else
                 @include('results.studentShow')
                 @endif
             </div>
+            @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course ) ), 'results.editModal')
             @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course ) ), 'layouts.deleteModal')
         </main>
     </div>
@@ -22,5 +24,6 @@
 @endsection
 
 @section('footer-scripts')
+<script src="{{ asset('js/modalResults.js') }}" defer></script>
 <script src="{{ asset('js/modalDelete.js') }}" defer></script>
 @endsection
