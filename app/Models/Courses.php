@@ -13,7 +13,14 @@ class Courses extends Model
 
     public static function courses()
     {
-        return static::orderBy('name')->get();
+        return static::orderBy('name')->paginate(10);
+    }
+
+    public static function courseFilter( int $programm_id)
+    {
+        return static::whereHas('programmes', function ($query) use ($programm_id) {
+            $query->where('id', $programm_id);
+        })->orderBy('name')->paginate(10);
     }
 
     public function courseAdmin()

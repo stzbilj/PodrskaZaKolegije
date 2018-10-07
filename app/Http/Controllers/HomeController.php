@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Courses;
+use App\Models\Programm;
 use App\Models\Results;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with('courses', Courses::courses());
+        $programmes = Programm::programmes();
+        if( request()->has('programm') && in_array( request()->programm, Programm::programmes()->pluck('id')->toArray() ) ) {
+            return view('home', [ 'courses' => Courses::courseFilter(request()->programm), 'programmes' => $programmes]);
+        } else{
+            return view('home', [ 'courses' => Courses::courses(), 'programmes' => $programmes]);
+        }
     }
 
     public function results()
