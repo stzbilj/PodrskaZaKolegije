@@ -46,6 +46,11 @@ class User extends Authenticatable
         return in_array( $course, $this->coursesAdmin->pluck('id')->toArray());
     }
 
+    public static function getAllProfessors()
+    {
+        return self::where('role', 0)->orderBy('surname')->get();
+    }
+
     public function info()
     {
         return $this->hasOne(StudentsInfo::class);
@@ -53,7 +58,7 @@ class User extends Authenticatable
 
     public function coursesAdmin()
     {
-        return $this->belongsToMany(Programm::class, 'admin_course', 'user_id', 'course_id');
+        return $this->belongsToMany(Courses::class, 'admin_course', 'user_id', 'course_id');
     }
 
     public function posts()

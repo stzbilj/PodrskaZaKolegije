@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Courses;
 use App\Models\Programm;
 use \App\Models\ExamType;
+use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -35,7 +36,7 @@ class CourseController extends Controller
     public function create()
     {
         //
-        return view('course.createForm', ['programmes' => Programm::programmes(), 'exams' => ExamType::examTypes()]);
+        return view('course.createForm', ['programmes' => Programm::programmes(), 'exams' => ExamType::examTypes(), 'professors' => User::getAllProfessors()]);
     }
 
     /**
@@ -47,6 +48,30 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string',
+            'programms' => 'required'
+        ]);
+
+        $course = Courses::create([
+            'name' => $request->name
+        ]);
+
+        $course->programmes()->attach($request->programms);
+
+        $users = [];
+        if( $request->has('users') ) {
+            $users = $request->users;
+        }
+        array_push( $users, auth()->user()->id);
+
+        $course->courseAdmin()->attach($users);
+
+        if( $request->has('exams') ) {
+            $course->examsTypes()->attach($request->exams);
+        }
+
+        return Redirect::action('PostController@index', ['course' => $course]);       
     }
 
     /**
@@ -58,7 +83,7 @@ class CourseController extends Controller
     public function show( Courses $course)
     {
         //
-        return Redirect::action('PostController@index', ['course' => $course]);        
+        return Redirect::action('PostController@index', ['course' => $course]);       
     }
 
     /**
@@ -70,6 +95,15 @@ class CourseController extends Controller
     public function edit( Courses $course )
     {
         //
+        return view('course.edit', [
+            'course' => $course,
+            'programmes' => Programm::programmes(), 
+            'exams' => ExamType::examTypes(), 
+            'professors' => User::getAllProfessors(),
+            'admins' => $course->courseAdmin()->pluck('id')->toArray(),
+            'selected_programms' => $course->programmes()->pluck('id')->toArray(),
+            'selected_exams' => $course->examsTypes()->pluck('id')->toArray()
+        ]);
     }
 
     /**
@@ -93,6 +127,11 @@ class CourseController extends Controller
     public function destroy(Courses $course)
     {
         //
-        // Storage::deleteDirectory($directory);
+        $directory = 'public/'. $course->id . '_' . $course->name;
+        Storage::deleteDirectory($directory);
+        
+        $course->delete();
+
+        return Redirect::action('HomeController@index');
     }
 }

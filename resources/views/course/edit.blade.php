@@ -7,21 +7,21 @@
 @endsection
 
 @section('content')
-<main class="py-4">
-    @include('layouts.flashMessage')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Kreiraj novi kolegij</h4>
-                <hr>
-                <form action="{{ route('course.store') }}" method="POST">
+<div class="container-fluid">
+    <div class="row">
+        @include('layouts.sidebar')
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <h1>Uređivanje</h1>
+    
+            <div class="col-sm-12 blog-main">
+                <form action="{{ route('course.update', ['course' => $course]) }}" method="POST">
+                    @method('PATCH')
                     @csrf
-
                     <div class="form-group row">
                         <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Ime kolegija') }}</label>
                         
                         <div class="col-md-5">
-                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
+                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', $course->name) }}" required>
                             
                             @if ($errors->has('name'))
                             <span class="invalid-feedback">
@@ -31,21 +31,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                            <label for="show" class="col-md-3 col-form-label text-md-right">{{ __('Voditelj stranice kolegija') }}</label>
-                            
-                            <div class="col-md-5">
-                                <input id="show" class="form-control" value="{{ auth()->user()->name }} {{ auth()->user()->surname }}" disabled>
-                            </div>
-                        </div>
-                    <div class="form-group row">
-                        <label for="users" class="col-md-3 col-form-label text-md-right">{{ __('Dodatni voditelji kolegija') }}</label>
+                        <label for="users" class="col-md-3 col-form-label text-md-right">{{ __('Voditelji kolegija') }}</label>
                         
                         <div class="col-md-9">
                                 <select id="users" class="custom-select select2" name="users[]" multiple="multiple">
                                     @foreach ($professors as $professor)
-                                    @if (auth()->user()->id !== $professor->id)
-                                    <option value={{ $professor->id }}>{{ $professor->name }} {{ $professor->surname }}</option>
-                                    @endif
+                                    <option value="{{ $professor->id }}"  {{ in_array($professor->id, $admins) ? 'selected' : ''}}>{{ $professor->name }} {{ $professor->surname }}</option>
                                     @endforeach
                                 </select>
                         </div>
@@ -56,7 +47,7 @@
                         <div class="col-md-8">
                             @foreach ($programmes as $programm)
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="programms[]" id="programmCheck{{ $programm->id }}" value="{{ $programm->id }}">
+                                <input type="checkbox" class="custom-control-input" name="programms[]" id="programmCheck{{ $programm->id }}" value="{{ $programm->id }}" {{ in_array($programm->id, $selected_programms) ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="programmCheck{{ $programm->id }}">{{ $programm->name }}; {{ $programm->type }} {{ __('studij') }}</label>
                             </div>
                             @endforeach
@@ -68,7 +59,7 @@
                         <div class="col-md-8">
                             @foreach ($exams as $exam)
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="exams[]" id="examCheck{{ $exam->id }}" value="{{ $exam->id }}">
+                                <input type="checkbox" class="custom-control-input" name="exams[]" id="examCheck{{ $exam->id }}" value="{{ $exam->id }}" {{ in_array($exam->id, $selected_exams) ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="examCheck{{ $exam->id }}">{{ $exam->name }}</label>
                             </div>
                             @endforeach
@@ -76,17 +67,23 @@
                     </div>
                         
                     <div class="form-group row mb-0 justify-content-center">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Kreiraj') }}
-                        </button>
+                        <div>
+
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Kreiraj') }}
+                            </button>
+                            <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati kolegij {{ $course->name }} i sve njegove podatke?" data-action="{{route('course.destroy', ['course' => $course->id])}}">Izbriši</button>
+                        </div>
                     </div>
                 </form>
             </div>
-        </div>
+            @include('layouts.deleteModal')
+        </main>
     </div>
-</main>
+</div>
 @endsection
 
 @section('footer-scripts')
 <script src="{{ asset('js/select2.js') }}" defer></script>
+<script src="{{ asset('js/modalDelete.js') }}" defer></script>
 @endsection

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Courses extends Model
 {
     //
+    protected $fillable = ['name'];
+
     public $timestamps = false;
 
     public static function courses()
@@ -14,9 +16,14 @@ class Courses extends Model
         return static::orderBy('name')->get();
     }
 
+    public function courseAdmin()
+    {
+        return $this->belongsToMany(User::class, 'admin_course', 'course_id', 'user_id');
+    }
+
     public function programmes()
     {
-        return $this->belongsToMany(Programm::class, 'course_programm', 'course_id', 'programm_id')->withPivot('year');
+        return $this->belongsToMany(Programm::class, 'course_programm', 'course_id', 'programm_id');
     }
 
     public function views()
