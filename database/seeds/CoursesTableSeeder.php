@@ -31,7 +31,6 @@ class CoursesTableSeeder extends Seeder
             array(
                 'course_id' => $courseId,
                 'programm_id' => $programmsId,
-                'year' => 2,
             )
         );
 
@@ -53,7 +52,6 @@ class CoursesTableSeeder extends Seeder
             array(
                 'course_id' => $courseId,
                 'programm_id' => $programmsId,
-                'year' => 1,
             )
         );
 

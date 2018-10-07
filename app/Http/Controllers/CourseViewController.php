@@ -30,7 +30,7 @@ class CourseViewController extends Controller
         } elseif ($course_view->view === '' ) {
             $course_view->view = '<h1>Obavijest</h1><p>Ova stranica je još u izradi.</p>';
         }
-        return view('course.courseView', ['course_view' => $course_view ]);
+        return view('course.courseView', ['course' => $course, 'course_view' => $course_view ]);
     }
 
     public function update(Request $request, Courses $course, $type)

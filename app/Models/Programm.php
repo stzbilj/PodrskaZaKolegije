@@ -16,6 +16,6 @@ class Programm extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Courses::class, 'course_programm', 'programm_id', 'course_id')->withPivot('year');
+        return $this->belongsToMany(Courses::class, 'course_programm', 'programm_id', 'course_id');
     }
 }

@@ -70,7 +70,7 @@
                         <div>
 
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Kreiraj') }}
+                                {{ __('Izmjeni') }}
                             </button>
                             <button id="delete-item" class="btn btn-danger" data-text="Jeste li sigurni da želite pobrisati kolegij {{ $course->name }} i sve njegove podatke?" data-action="{{route('course.destroy', ['course' => $course->id])}}">Izbriši</button>
                         </div>

@@ -23,7 +23,6 @@ class CreateProgrammsTable extends Migration
         Schema::create('course_programm', function (Blueprint $table) {
             $table->integer('course_id')->unsigned();
             $table->integer('programm_id')->unsigned();
-            $table->integer('year');
             $table->primary(['course_id', 'programm_id']);
         });
         

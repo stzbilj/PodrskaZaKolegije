@@ -8,6 +8,7 @@ use \App\Models\ExamType;
 use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -116,6 +117,26 @@ class CourseController extends Controller
     public function update(Request $request, Courses $course)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string',
+            'programms' => 'required',
+            'users' => 'required'
+        ]);
+
+        $course->name = $request->name;
+        $course->save();
+
+        $course->programmes()->sync($request->programms);
+
+        $users = $request->users;
+        $course->courseAdmin()->sync($users);
+        
+
+        if( $request->has('exams') ) {
+            $course->examsTypes()->sync($request->exams);
+        }
+
+        return Redirect::action('PostController@index', ['course' => $course]); 
     }
 
     /**
