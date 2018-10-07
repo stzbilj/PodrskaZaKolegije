@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('home', 'HomeController@index');
+Route::get('results/all', 'HomeController@results')->name('results.all');
 
 Route::resource('course', 'CourseController');
 

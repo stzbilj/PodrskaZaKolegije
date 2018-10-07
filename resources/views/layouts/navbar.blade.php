@@ -9,21 +9,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Kolegiji
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach($courses as $course)
-                        <a class="dropdown-item" href="#">{{ $course['name'] }}</a>
-                        @endforeach
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 @if(auth()->check() && Auth::user()->isProfessor())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('course.create') }}">Dodaj novi kolegij</a>
+                </li>
+                @endif
+                @if(auth()->check() && Auth::user()->isStudent())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('results.all') }}">Moji rezultati</a>
                 </li>
                 @endif
             </ul>

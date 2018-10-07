@@ -15,7 +15,7 @@ class ResultsController extends Controller
 {
     public function __construct() 
     {
-      $this->middleware('auth');
+      $this->middleware('cadminOrStudent', ['only' => ['index']]);
       $this->middleware('cadmin', ['except' => ['index']]);
 
     }
@@ -27,7 +27,11 @@ class ResultsController extends Controller
     public function index(Courses $course)
     {
         //
-        return view('results.index', ['results_infos' => $course->getResultsInfos(), 'course' => $course ]);
+        if( auth()->user()->isAdmin($course)) {
+            return view('results.index', ['results_infos' => $course->getResultsInfos(), 'course' => $course ]);
+        }
+
+        return view('results.index', ['results' => Results::getResultsForUserByCourse(auth()->user(), $course), 'course' => $course ]);
     }
 
     /**

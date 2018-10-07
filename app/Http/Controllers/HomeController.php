@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courses;
+use App\Models\Results;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('student', ['only' => 'results']);
     }
 
     /**
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with('courses', \App\Models\Courses::courses());
+        return view('home')->with('courses', Courses::courses());
+    }
+
+    public function results()
+    {
+        return view('results.showAll')->with('results', Results::getResultsForUser(auth()->user()));
     }
 }

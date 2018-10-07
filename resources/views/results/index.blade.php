@@ -12,8 +12,12 @@
                 @include('results.create')
                 <hr />
                 @include('results.adminShow')  
-                @else
-                @include('results.studentShow')
+                @elseif (Auth::check() && Auth::user()->isStudent( ))
+                    @if ($results->count() === 0)
+                            <p>Trenutno nema rezultata za prikaz</p>
+                    @else
+                        @include('results.studentShow')
+                    @endif
                 @endif
             </div>
             @includeWhen(( Auth::check() && Auth::user()->isAdmin( $course ) ), 'results.editModal')
