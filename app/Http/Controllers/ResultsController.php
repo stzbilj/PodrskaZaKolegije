@@ -96,7 +96,7 @@ class ResultsController extends Controller
     {
         //
         $result->header = json_decode($result->header); 
-        return view('results.show', ['results_info' => $result, 'results' => $result->results ]);
+        return view('results.show', ['results_info' => $result, 'results' => $result->results, 'course' => $course ]);
 
     }
 
@@ -165,8 +165,8 @@ class ResultsController extends Controller
     public function destroy(Courses $course, ResultsInfo $result)
     {
         //
-        $results->delete();
+        $result->delete();
 
-        return Redirect::action('ExamController@index', ['course' => $course]);
+        return Redirect::action('ResultsController@index', ['course' => $course]);
     }
 }

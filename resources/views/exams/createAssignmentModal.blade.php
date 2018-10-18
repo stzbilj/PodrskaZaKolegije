@@ -10,7 +10,7 @@
             <div class="modal-body">
               <div class="form-group row">
                 <div class="col-sm-12">
-                    <label for="text_link">Text poveznice</label>
+                    <label for="text_link">Tekst poveznice</label>
                     <input type="text" class="form-control" name="text_link" required>
                 </div>
               </div>

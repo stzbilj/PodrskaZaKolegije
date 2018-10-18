@@ -1,5 +1,5 @@
 <h2 class="blog-post-title">Novi rezultati</h2>
-<p class="blog-post-meta"><strong>Uputstva:</strong> Rezultate je potrebno učitati u CSV formatu.U prvom redu se nalaze imena stupaca.
+<p class="blog-post-meta"><strong>Uputstva:</strong> Rezultate je potrebno učitati u CSV formatu. U prvom redu se nalaze imena stupaca.
     Prvi stupac se mora zvati JMBAG i u njemu se nalaze JMBAG-ovi studenata.
     U ostalim se nalaze zadaci s pripadajućim bodovima i slični potrebni rezultati.<br />
     Primjer:<br />

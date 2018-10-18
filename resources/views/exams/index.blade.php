@@ -16,7 +16,7 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Zadaci</h1>
 
-            <h4>Kolkoviji</h4>
+            <h4>Kolokviji</h4>
             @if ( ( Auth::check() && Auth::user()->isAdmin( $course ) ) )
             <div class="btn-group btn-margin">
                 <button id="create-exam" class="btn btn-primary" data-types="{{ $course->examsTypes->toJson() }}"
