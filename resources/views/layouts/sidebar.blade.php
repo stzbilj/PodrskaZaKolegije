@@ -26,7 +26,7 @@
         Zadaci{!! Request::routeIs('exams.index') ? '<span class="sr-only">(current)</span>' : '' !!}
       </a>
     </li>
-    @if ( Auth::check() )
+    @if ( Auth::check() && ( Auth::user()->isAdmin( Request::route('course') ) || Auth::user()->isStudent() ) )
     <li class="nav-item">
       <a class="nav-link text-light {{ Request::routeIs('results.index') ? 'active' : '' }}"
           href="{{ route('results.index', ['course' => Request::route('course')]) }}">
